@@ -42,8 +42,9 @@ public class Maze {
     public void print(){
         int row = maze.length;
         int col = maze[0].length;
+        System.out.println("-".repeat(col+2));
         for(int i = 0; i < row; i++){
-            //System.out.print("{");
+            System.out.print("|");
             for(int j = 0; j < col; j++){
                 if(startPosition.getColumnIndex() == j && startPosition.getRowIndex() == i){
                     System.out.print("S");
@@ -51,13 +52,18 @@ public class Maze {
                     System.out.print("E");
                 }
                 else{
-                    System.out.print(maze[i][j]);
+                    //System.out.print(maze[i][j]);
+                    if(maze[i][j] == 0) {
+                        System.out.print(" ");
+                    }
+                    else{
+                        System.out.print(1);
+                    }
                 }
-                /*if(j+1 != col) { //not last element
-                    System.out.print(",");
-                }*/
             }
+            System.out.print("|");
             System.out.println();
         }
+        System.out.println("-".repeat(col+2));
     }
 }
