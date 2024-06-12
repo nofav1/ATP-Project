@@ -9,8 +9,9 @@ public class EmptyMazeGenerator extends AMazeGenerator{
                 maze[i][j] = 0;
             }
         }
-        Position s = new Position(0, 0);
-        Position e = new Position(rows - 1, columns - 1);
+        Position[] points = generateRandomFramePoints(rows,columns);
+        Position s = points[0];
+        Position e = points[1];
         return new Maze(maze, s, e);
     }
 }
