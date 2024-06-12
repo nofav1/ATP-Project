@@ -8,4 +8,9 @@ public class GeneralCheckingFunctions {
         boolean weChoseToDoTheMaze3DAssignment = false;
         return weChoseToDoTheMaze3DAssignment;
     }
+
+    public static String getGithubLink(){
+        String githubLink = "https://github.com/nofav1/ATP-Project";
+        return githubLink;
+    }
 }
