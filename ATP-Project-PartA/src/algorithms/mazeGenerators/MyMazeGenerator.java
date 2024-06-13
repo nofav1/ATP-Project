@@ -1,5 +1,6 @@
 package algorithms.mazeGenerators;
 
+import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,11 +10,18 @@ public class MyMazeGenerator extends AMazeGenerator{
     final int PASSAGE = 0;
     @Override
     public Maze generate(int rows, int columns) {
+        boolean oddR = false, oddC = false;
         //add rows and cols for frame
-        if(rows % 2 == 1){rows+=3;}
-        else{rows+=4;}
-        if(columns % 2 == 1){columns+=3;}
-        else{columns+=4;}
+        if(rows % 2 == 1){
+            rows+=2;
+            oddR = true;
+        }
+        else{rows+=3;}
+        if(columns % 2 == 1){
+            columns+=2;
+            oddC = true;
+        }
+        else{columns+=3;}
 
         int[][] maze = new int[rows][columns];
         List<int[]> wallList = new ArrayList<>();
@@ -63,14 +71,20 @@ public class MyMazeGenerator extends AMazeGenerator{
             }
         }
 
+        int rowsToRemove, colsToRemove;
+        if(oddR){rowsToRemove = 2;}
+        else{rowsToRemove = 3;}
+        if(oddC){colsToRemove = 2;}
+        else{colsToRemove = 3;}
+
         //remove frame
-        int[][] mazeWithOutFrame = new int[rows - 2][columns - 2];
-        for (int i = 1; i < rows - 1; i++) {
-            for (int j = 1; j < columns - 1; j++) {
+        int[][] mazeWithOutFrame = new int[rows - rowsToRemove][columns - colsToRemove];
+        for (int i = 1; i < mazeWithOutFrame.length + 1; i++) {
+            for (int j = 1; j < mazeWithOutFrame[0].length + 1; j++) {
                 mazeWithOutFrame[i - 1][j - 1] = maze[i][j]; // Copy elements from the original array to the cropped array
             }
         }
-        rows-=2; columns-=2;
+        rows-=rowsToRemove; columns-=colsToRemove;
         //choose start and end position
         int[] start = getRandomPointOnFrame(rows, columns);
         int[] end = getRandomPointOnFrame(rows, columns);

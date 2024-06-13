@@ -39,6 +39,14 @@ public class Maze {
         this.goalPosition = goalPosition;
     }
 
+    public boolean isWall(Position p){
+        return maze[p.getRowIndex()][p.getColumnIndex()] == 1;
+    }
+
+    public boolean inMaze(Position p){
+        return p.getRowIndex() < maze.length && p.getRowIndex() >= 0 && p.getColumnIndex() < maze[0].length && p.getColumnIndex() >= 0;
+    }
+
     public void print(){
         int row = maze.length;
         int col = maze[0].length;
@@ -54,7 +62,7 @@ public class Maze {
                 else{
                     //System.out.print(maze[i][j]);
                     if(maze[i][j] == 0) {
-                        System.out.print(" ");
+                        System.out.print(0);
                     }
                     else{
                         System.out.print(1);

@@ -1,12 +1,25 @@
 package algorithms.search;
 
-import java.util.List;
+import java.util.*;
 
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
-    protected List<AState> closedList;
-    protected List<AState> openedList;
+    protected PriorityQueue<AState> openedList;
+    protected Set<AState> visited;
+    private int visitedNodes; //pop from openedList
 
-    public String getNumberOfNodesEvaluated() {
-        return String.valueOf(closedList.size());
+    public ASearchingAlgorithm() {
+        openedList = new PriorityQueue<>(Comparator.comparingInt(AState::getCost));
+        visited = new HashSet<>();
+        visitedNodes = 0;
+    }
+
+    public AState popOpenList(){
+        visitedNodes++;
+        return openedList.poll();
+    }
+
+    @Override
+    public int getNumberOfNodesEvaluated() {
+        return visitedNodes;
     }
 }
