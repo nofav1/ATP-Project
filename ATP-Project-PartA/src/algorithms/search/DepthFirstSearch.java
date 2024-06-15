@@ -1,15 +1,14 @@
 package algorithms.search;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Stack;
+import java.util.*;
 
 public class DepthFirstSearch extends ASearchingAlgorithm{
     private Stack<AState> stack;
+    private Set<AState> inProgress;
 
     public DepthFirstSearch() {
         stack = new Stack<>();
+        inProgress = new HashSet<>();
         vectorsCost = new LinkedHashMap<>() {{
             put(new Integer[]{-1, 0}, 1);// up
             put(new Integer[]{-1, 1}, 1);// upper-right diagonal
@@ -30,9 +29,15 @@ public class DepthFirstSearch extends ASearchingAlgorithm{
         AState goalState = domain.getGoalState();
         stack.push(startState);
         visited.add(startState);
+        inProgress.add(startState);
+        AState currentState = startState;
 
         while (!stack.isEmpty()) {
-            AState currentState = stack.pop();
+            AState formerState = currentState;
+            currentState = stack.pop();
+//            if(currentState != startState){
+//                currentState.setCameFrom(formerState);
+//            }
 
             // Check if goal state is reached
             if (currentState.equals(goalState)) {
@@ -45,13 +50,15 @@ public class DepthFirstSearch extends ASearchingAlgorithm{
             for (AState successor : successors) {
                 if (!visited.contains(successor)) {
                     successor.setCameFrom(currentState);
+                    //if(inProgress.contains(successor))
                     stack.push(successor);
-                    visited.add(successor);
+                    //visited.add(successor);
+                    inProgress.add(successor);
                 }
             }
+            visited.add(currentState);
             visitedNodes++;
         }
-
         // Return null if no solution is found
         return null;
 
