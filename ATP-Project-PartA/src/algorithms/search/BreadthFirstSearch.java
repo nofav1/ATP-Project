@@ -3,7 +3,10 @@ package algorithms.search;
 import java.util.*;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm{
+    protected PriorityQueue<AState> openedList;
+
     public BreadthFirstSearch() {
+        openedList = new PriorityQueue<>(Comparator.comparingInt(AState::getCost));
         vectorsCost = new LinkedHashMap<>() {{
             put(new Integer[]{-1, 0}, 1);// up
             put(new Integer[]{-1, 1}, 1);// upper-right diagonal
@@ -16,6 +19,12 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
 
         }};
     }
+
+    public AState popOpenList(){
+        visitedNodes++;
+        return openedList.poll();
+    }
+
     @Override
     public Solution solve(ISearchable domain) {
         AState startState = domain.getStartState();
