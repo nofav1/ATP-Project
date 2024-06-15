@@ -7,6 +7,7 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
     protected Set<AState> visited;
     private int visitedNodes; //pop from openedList
 
+    protected  Map<Integer[],Integer> vectorsCost;
     public ASearchingAlgorithm() {
         openedList = new PriorityQueue<>(Comparator.comparingInt(AState::getCost));
         visited = new HashSet<>();
