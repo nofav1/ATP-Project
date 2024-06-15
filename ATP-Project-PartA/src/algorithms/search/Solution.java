@@ -9,6 +9,10 @@ public class Solution {
         solutionPath = new ArrayList<>();
     }
 
+    public Solution(ArrayList<AState> solutionPath) {
+        this.solutionPath = solutionPath;
+    }
+
     public ArrayList<AState> getSolutionPath(){
         return solutionPath;
     }

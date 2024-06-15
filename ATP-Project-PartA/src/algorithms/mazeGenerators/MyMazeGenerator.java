@@ -79,9 +79,9 @@ public class MyMazeGenerator extends AMazeGenerator{
 
         //remove frame
         int[][] mazeWithOutFrame = new int[rows - rowsToRemove][columns - colsToRemove];
-        for (int i = 1; i < mazeWithOutFrame.length + 1; i++) {
-            for (int j = 1; j < mazeWithOutFrame[0].length + 1; j++) {
-                mazeWithOutFrame[i - 1][j - 1] = maze[i][j]; // Copy elements from the original array to the cropped array
+        for (int i = 0; i < mazeWithOutFrame.length; i++) {
+            for (int j = 0; j < mazeWithOutFrame[0].length; j++) {
+                mazeWithOutFrame[i][j] = maze[i + 1][j + 1]; // Copy elements from the original array to the cropped array
             }
         }
         rows-=rowsToRemove; columns-=colsToRemove;
@@ -93,7 +93,7 @@ public class MyMazeGenerator extends AMazeGenerator{
             start = getRandomPointOnFrame(rows, columns);
         }
 
-        while (mazeWithOutFrame[end[0]][end[1]] != PASSAGE) {
+        while (end != start && mazeWithOutFrame[end[0]][end[1]] != PASSAGE) {
             end = getRandomPointOnFrame(rows, columns);
         }
 

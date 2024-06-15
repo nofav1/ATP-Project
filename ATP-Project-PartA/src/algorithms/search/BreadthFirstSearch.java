@@ -5,14 +5,14 @@ import java.util.*;
 public class BreadthFirstSearch extends ASearchingAlgorithm{
     public BreadthFirstSearch() {
         vectorsCost = new LinkedHashMap<>() {{
-            put(new Integer[]{-1, 0}, 0);// up
-            put(new Integer[]{-1, 1}, 0);// upper-right diagonal
-            put(new Integer[]{0, 1}, 0);// right
-            put(new Integer[]{1, 1}, 0);// lower-right diagonal
-            put(new Integer[]{1, 0}, 0); // down
-            put(new Integer[]{1, -1}, 0); // lower-left diagonal
-            put(new Integer[]{0, -1}, 0); // left
-            put(new Integer[]{-1, -1}, 0); // upper-left diagonal
+            put(new Integer[]{-1, 0}, 1);// up
+            put(new Integer[]{-1, 1}, 1);// upper-right diagonal
+            put(new Integer[]{0, 1}, 1);// right
+            put(new Integer[]{1, 1}, 1);// lower-right diagonal
+            put(new Integer[]{1, 0}, 1); // down
+            put(new Integer[]{1, -1}, 1); // lower-left diagonal
+            put(new Integer[]{0, -1}, 1); // left
+            put(new Integer[]{-1, -1}, 1); // upper-left diagonal
 
         }};
     }
@@ -29,7 +29,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
         costMap.put(startState, 0);
 
         while (!openedList.isEmpty()) {
-            AState currentState = popOpenList();
+            AState currentState = popOpenList(); //evaluate++
             visited.add(currentState);
 
             if (currentState.equals(goalState)) {
