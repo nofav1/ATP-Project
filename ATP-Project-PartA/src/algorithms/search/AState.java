@@ -2,8 +2,6 @@ package algorithms.search;
 
 
 import algorithms.mazeGenerators.Position;
-
-import java.util.List;
 import java.util.Objects;
 
 public abstract class AState {

@@ -37,7 +37,6 @@ class BestFirstSearchTest {
 
         //Solve a searching problem with a searcher
         Solution solution = searcher.solve(new SearchableMaze(maze));
-        //assertEquals(100, searcher.getNumberOfNodesEvaluated());
 
         //Printing Solution Path
         ArrayList<AState> solutionPath = solution.getSolutionPath();
@@ -55,24 +54,9 @@ class BestFirstSearchTest {
         );
         assertEquals(solutionPathExpected, solutionPath);
 
-        /*//breadth
-        ISearchingAlgorithm searcher1 = new BreadthFirstSearch();
-        Solution solution1 = searcher1.solve(new SearchableMaze(maze));
-
-        ArrayList<AState> solutionPath1 = solution1.getSolutionPath();
-        ArrayList<AState> solutionPathExpected1 = new ArrayList<>(Arrays.asList(
-                new MazeState(new Position(0, 8), 0),
-                new MazeState(new Position(0, 7), 0),
-                new MazeState(new Position(1, 6), 0),
-                new MazeState(new Position(2, 5), 0),
-                new MazeState(new Position(3, 4), 0),
-                new MazeState(new Position(4, 3), 0),
-                new MazeState(new Position(5, 2), 0),
-                new MazeState(new Position(4, 1), 0),
-                new MazeState(new Position(4, 0), 0))
-
-        );
-        assertEquals(solutionPathExpected1, solutionPath1);*/
+        //checking if entered a null maze
+        Solution solution1 = searcher.solve(null);
+        assertEquals(solution1.getSolutionPath(), new Solution().getSolutionPath()); //empty solution path
     }
 
 }

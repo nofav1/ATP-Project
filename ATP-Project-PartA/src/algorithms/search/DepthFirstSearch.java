@@ -24,43 +24,48 @@ public class DepthFirstSearch extends ASearchingAlgorithm{
 
     @Override
     public Solution solve(ISearchable domain) {
-        // Initialize stack and visited set
-        AState startState = domain.getStartState();
-        AState goalState = domain.getGoalState();
-        stack.push(startState);
-        visited.add(startState);
-        inProgress.add(startState);
-        AState currentState = startState;
+        try {
 
-        while (!stack.isEmpty()) {
-            AState formerState = currentState;
-            currentState = stack.pop();
-//            if(currentState != startState){
-//                currentState.setCameFrom(formerState);
-//            }
 
-            // Check if goal state is reached
-            if (currentState.equals(goalState)) {
-                return constructSolution(currentState);
-            }
+            // Initialize stack and visited set
+            AState startState = domain.getStartState();
+            AState goalState = domain.getGoalState();
+            stack.push(startState);
+            visited.add(startState);
+            inProgress.add(startState);
+            AState currentState = startState;
 
-            // Get all successors
-            ArrayList<AState> successors = domain.getAllSuccessors(currentState, vectorsCost);
-            Collections.reverse(successors);
-            for (AState successor : successors) {
-                if (!visited.contains(successor)) {
-                    successor.setCameFrom(currentState);
-                    //if(inProgress.contains(successor))
-                    stack.push(successor);
-                    //visited.add(successor);
-                    inProgress.add(successor);
+            while (!stack.isEmpty()) {
+                AState formerState = currentState;
+                currentState = stack.pop();
+
+                // Check if goal state is reached
+                if (currentState.equals(goalState)) {
+                    return constructSolution(currentState);
                 }
+
+                // Get all successors
+                ArrayList<AState> successors = domain.getAllSuccessors(currentState, vectorsCost);
+                Collections.reverse(successors);
+                for (AState successor : successors) {
+                    if (!visited.contains(successor)) {
+                        successor.setCameFrom(currentState);
+                        stack.push(successor);
+                        inProgress.add(successor);
+                    }
+                }
+                visited.add(currentState);
+                visitedNodes++;
             }
-            visited.add(currentState);
-            visitedNodes++;
+            // Return null if no solution is found
+            return null;
         }
-        // Return null if no solution is found
-        return null;
+        catch (Exception e){
+            if(e instanceof NullPointerException){
+                System.out.println("Invalid domain entered");
+            }
+            return null;
+        }
 
     }
 

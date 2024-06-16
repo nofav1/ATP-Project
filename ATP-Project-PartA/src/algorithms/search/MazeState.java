@@ -7,7 +7,6 @@ public class MazeState extends AState{
         this.currentPosition = currentPosition;
         this.cost = cost;
     }
-
     @Override
     public String toString() {
         return currentPosition.toString();

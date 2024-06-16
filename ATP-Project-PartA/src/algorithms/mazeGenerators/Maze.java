@@ -1,14 +1,33 @@
 package algorithms.mazeGenerators;
 
+import javax.management.InvalidAttributeValueException;
+
 public class Maze {
     private int[][] maze;
     private Position startPosition;
     private Position goalPosition;
 
+    public Maze() {
+        maze = new int[][]{};
+        startPosition = new Position(-1, -1);
+        goalPosition = new Position(-1, -1);
+    }
+
     public Maze(int[][] maze, Position startPosition, Position goalPosition) {
-        this.maze = maze;
-        this.startPosition = startPosition;
-        this.goalPosition = goalPosition;
+        try {
+            this.maze = maze;
+            this.startPosition = startPosition;
+            this.goalPosition = goalPosition;
+            if(maze == null || startPosition.getRowIndex() < 0 || startPosition.getColumnIndex() < 0 || goalPosition.getRowIndex() < 0 || goalPosition.getColumnIndex() < 0 || startPosition.getRowIndex() >= maze.length || startPosition.getColumnIndex() >= maze[0].length || goalPosition.getRowIndex() >= maze.length || goalPosition.getColumnIndex() >= maze[0].length){
+                throw new InvalidAttributeValueException();
+            }
+        }
+        catch (InvalidAttributeValueException e) {
+            System.out.println("Invalid input");
+        }
+        catch (Exception e){
+            System.out.println("Invalid input");
+        }
     }
 
     public Maze(int[][] maze) {
