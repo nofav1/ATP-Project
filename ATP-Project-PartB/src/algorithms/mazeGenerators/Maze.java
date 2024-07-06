@@ -34,6 +34,16 @@ public class Maze {
         this.maze = maze;
     }
 
+    //TODO: implement
+    public Maze(byte[] bytes){
+
+    }
+
+    //TODO: implement
+    public byte[] toByteArray(){
+        return null;
+    }
+
     public int[][] getMaze() {
         return maze;
     }
