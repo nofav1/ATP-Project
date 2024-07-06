@@ -1,6 +1,7 @@
 package algorithms.mazeGenerators;
 
 import javax.management.InvalidAttributeValueException;
+import java.nio.ByteBuffer;
 
 public class Maze {
     private int[][] maze;
@@ -34,14 +35,56 @@ public class Maze {
         this.maze = maze;
     }
 
-    //TODO: implement
+    //format: rows, cols, startRow, startCol, goalRow, goalCol, maze
     public Maze(byte[] bytes){
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
 
+        // Get dimensions
+        int rows = buffer.getInt();
+        int cols = buffer.getInt();
+
+        // Get start and end positions
+        startPosition = new Position(buffer.getInt(), buffer.getInt());
+        goalPosition = new Position(buffer.getInt(), buffer.getInt());
+
+        // Get maze data
+        this.maze = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                maze[i][j] = buffer.get();
+            }
+        }
     }
 
-    //TODO: implement
+    //format: rows, cols, startRow, startCol, goalRow, goalCol, maze
     public byte[] toByteArray(){
-        return null;
+        int rows = maze.length;
+        int cols = maze[0].length;
+
+        // Calculate the total size needed for the byte array
+        int size = 2 * Integer.BYTES + 4 * Integer.BYTES + rows * cols;
+
+        ByteBuffer buffer = ByteBuffer.allocate(size);
+
+        // Add dimensions
+        buffer.putInt(rows);
+        buffer.putInt(cols);
+
+        // Add start and end positions
+        buffer.putInt(startPosition.getRowIndex());
+        buffer.putInt(startPosition.getColumnIndex());
+        buffer.putInt(goalPosition.getRowIndex());
+        buffer.putInt(goalPosition.getColumnIndex());
+
+        // Add maze data
+        for (int[] row : maze) {
+            for (int cell : row) {
+                buffer.put((byte) cell);
+            }
+        }
+
+        return buffer.array();
+
     }
 
     public int[][] getMaze() {
