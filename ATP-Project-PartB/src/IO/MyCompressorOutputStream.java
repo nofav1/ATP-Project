@@ -35,11 +35,6 @@ public class MyCompressorOutputStream extends OutputStream {
         byte[] compressedData = huffmanTree.compress(b);
         out.write(compressedData);
     }
-
-    //TODO: implement
-    public void compress(){
-
-    }
 }
 
 class HuffmanTree {

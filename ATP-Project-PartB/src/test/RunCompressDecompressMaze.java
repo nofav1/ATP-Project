@@ -18,7 +18,6 @@ public class RunCompressDecompressMaze {
         try {
             // save maze to a file
             OutputStream out = new MyCompressorOutputStream(new FileOutputStream(mazeFileName));
-            //OutputStream out = new SimpleCompressorOutputStream(new FileOutputStream(mazeFileName));
             byte[] b = maze.toByteArray();
             out.write(b);
             out.flush();
@@ -30,7 +29,6 @@ public class RunCompressDecompressMaze {
         try {
             //read maze from file
             InputStream in = new MyDecompressorInputStream(new FileInputStream(mazeFileName));
-            //InputStream in = new SimpleDecompressorInputStream(new FileInputStream(mazeFileName));
             savedMazeBytes = new byte[maze.toByteArray().length];
             in.read(savedMazeBytes);
             in.close();

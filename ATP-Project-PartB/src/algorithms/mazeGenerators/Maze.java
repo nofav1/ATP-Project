@@ -1,9 +1,10 @@
 package algorithms.mazeGenerators;
 
 import javax.management.InvalidAttributeValueException;
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-public class Maze {
+public class Maze implements Serializable {
     private int[][] maze;
     private Position startPosition;
     private Position goalPosition;
@@ -82,9 +83,7 @@ public class Maze {
                 buffer.put((byte) cell);
             }
         }
-
         return buffer.array();
-
     }
 
     public int[][] getMaze() {
