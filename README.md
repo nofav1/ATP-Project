@@ -36,6 +36,22 @@ The goal is to build a dynamic application that can generate mazes, handle multi
 
 ## 🚀 Installation & Setup
 
-1. **Clone the repository**:
+1. **Clone the repository**  
+   Clone the project to your local machine using:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/nofav1/ATP-Project.git
+
+2. **Open in IntelliJ or another Java IDE**
+
+   - Open the project folder: `ATP-Project/ATP-Project-PartB`
+
+   - The project includes subfolders like:
+     - `src/` – contains the main source code (`Client`, `Server`, `Algorithms`, etc.)
+     - `JUnit/` – contains test files
+     - `resources/` – configuration and supporting files
+
+3. **Build and run the project**
+
+   - Make sure your IDE resolves all dependencies (e.g., `JUnit`)
+   - Mark the `src` folder as **Source Root** and the `test` folder as **Test Root** in IntelliJ (if needed)
+   - Compile and run the server and client from their respective main classes
